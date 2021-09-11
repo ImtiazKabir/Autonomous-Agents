@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -Wconversion -Wpedantic -O3
 BINOUT = build/main.exe
 
 
-SRC = lib/getpath.c lib/whereami.c src/main.c src/engine.c src/loop.c src/once.c src/event.c src/vector.c src/vehicle.c
+SRC = lib/getpath.c lib/whereami.c src/main.c src/engine.c src/loop.c src/once.c src/event.c src/vector.c src/vehicle.c src/behaviour.c
 
 
 INC = -Iinclude
