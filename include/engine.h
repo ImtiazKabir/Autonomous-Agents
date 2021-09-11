@@ -21,13 +21,26 @@ bool event_handler();
 
 void setup(
   SDL_Renderer *renderer,
-  Vehicle **vehicle,
+  Vehicle ***vehicle_arr,
+  const int len,
   SDL_Texture **vehicle_img,
   Vector **mouse,
-  Vector **force);
+  Vector **force
+);
 
-void update(Vehicle *vehicle, Vector *mouse, Vector *force);
-void draw(SDL_Renderer *renderer, Vehicle *vehicle, SDL_Texture *vehicle_img, Vector *mouse);
-void clean_up(Vehicle *vehicle, SDL_Texture *vehicle_img, Vector *mouse);
+void update(Vehicle **vehicle_arr, Vector *mouse, Vector *force);
+void draw(
+  SDL_Renderer *renderer,
+  Vehicle **vehicle_arr,
+  SDL_Texture *vehicle_img,
+  Vector *mouse
+);
+
+void clean_up(
+  Vehicle **vehicle_arr,
+  SDL_Texture *vehicle_img,
+  Vector *mouse,
+  Vector *force
+);
 
 #endif /* D07D45CE_AA78_4D49_B29A_EBD0B6BCD4AD */

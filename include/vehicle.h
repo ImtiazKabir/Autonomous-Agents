@@ -12,7 +12,7 @@ typedef struct {
   float maxForce;
 } Vehicle;
 
-Vehicle *Vehicle_Create(float x, float y, float vx, float vy);
+Vehicle *Vehicle_Create();
 void Vehicle_Destroy(Vehicle *self);
 
 void Vehicle_Render(Vehicle *self, SDL_Renderer *renderer, SDL_Texture *vehicle_img);

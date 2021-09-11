@@ -20,19 +20,20 @@ void main_loop(void *v_renderer) {
 
   static Vector *mouse;
   static Vector *force;
-  static Vehicle *vehicle;
+  static Vehicle **vehicle_arr = NULL;
+  static const int len = 100;
   static SDL_Texture *vehicle_img;
 
   // setup part
   static bool __run_setup__ = true;
   if (__run_setup__) {
-    setup(renderer, &vehicle, &vehicle_img, &mouse, &force);
+    setup(renderer, &vehicle_arr, len, &vehicle_img, &mouse, &force);
     __run_setup__ = false;
   }
 
   // handle event
   if (event_handler()) {
-    clean_up(vehicle, vehicle_img, mouse);
+    clean_up(vehicle_arr, vehicle_img, mouse, force);
     #ifdef __EMSCRIPTEN__
     emscripten_cancel_main_loop();
     #else
@@ -42,8 +43,8 @@ void main_loop(void *v_renderer) {
   }
 
   // update and draw
-  update(vehicle, mouse, force);
-  draw(renderer, vehicle, vehicle_img, mouse);
+  update(vehicle_arr, mouse, force);
+  draw(renderer, vehicle_arr, vehicle_img, mouse);
   SDL_Delay(1000 / FPS);
   SDL_RenderPresent(renderer);
 }

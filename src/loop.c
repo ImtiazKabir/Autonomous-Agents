@@ -1,10 +1,18 @@
 #include <SDL2/SDL.h>
+#include <stdio.h>
 #include "engine.h"
 
 #include "vector.h"
 #include "vehicle.h"
+#include "stb/stb_ds.h"
 
-void draw(SDL_Renderer *renderer, Vehicle *vehicle, SDL_Texture *vehicle_img, Vector *mouse) {
+void draw(
+  SDL_Renderer *renderer,
+  Vehicle **vehicle_arr,
+  SDL_Texture *vehicle_img,
+  Vector *mouse
+) {
+
   if (SDL_SetRenderDrawColor(renderer, 55, 55, 55, 255) == -1)
     __PRINT_ERROR__("Setting the background color with SDL_SetRenderDrawColor");
   if (SDL_RenderClear(renderer) == -1)
@@ -19,17 +27,20 @@ void draw(SDL_Renderer *renderer, Vehicle *vehicle, SDL_Texture *vehicle_img, Ve
   if (SDL_RenderFillRectF(renderer, &mouse_rect)==-1)
     __PRINT_ERROR__("Drawing the mouse with SDL_RenderFillRectF");
 
-  Vehicle_Render(vehicle, renderer, vehicle_img);
+  for (int i = 0; i < (int) arrlen(vehicle_arr); ++i) {
+    Vehicle_Render(vehicle_arr[i], renderer, vehicle_img);
+  }
 }
 
 
-void update(Vehicle *vehicle, Vector *mouse, Vector *force) {
+void update(Vehicle **vehicle_arr, Vector *mouse, Vector *force) {
   int mx, my;
   SDL_GetMouseState(&mx, &my);
   mouse->x = (float) mx;
   mouse->y = (float) my;
 
-  Vehicle_ApplyForce(vehicle, Vehicle_Seek(vehicle, force, mouse));
-  // Vehicle_Flee(vehicle, vehicle->acc, mouse);
-  Vehicle_Update(vehicle);
+  for (int i = 0; i < (int) arrlen(vehicle_arr); ++i) {
+    Vehicle_ApplyForce(vehicle_arr[i], Vehicle_Seek(vehicle_arr[i], force, mouse));
+    Vehicle_Update(vehicle_arr[i]);
+  }
 }

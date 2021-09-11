@@ -7,13 +7,25 @@
 #include "vector.h"
 #include "engine.h"
 
-Vehicle *Vehicle_Create(float x, float y, float vx, float vy) {
+Vehicle *Vehicle_Create() {
   Vehicle *self = (Vehicle *) malloc(sizeof *self);
+  if (!self) {
+    fprintf(stderr, "Failed to allocate memory for Vehicle\n");
+  }
+  float x = rand() * (float) WIDTH / (float) RAND_MAX;
+  float y = rand() * (float) HEIGHT / (float) RAND_MAX;
   self->loc = Vector_CreateXY(x, y);
+
+  float vx = rand() * 3.0f / (float) RAND_MAX;
+  if (rand() % 2) vx *= -1.0f;
+  float vy = rand() * 3.0f / (float) RAND_MAX;
+  if (rand() % 2) vy *= -1.0f;
   self->vel = Vector_CreateXY(vx, vy);
+
   self->acc = Vector_ZERO();
-  self->maxSpeed = 4.0f;
-  self->maxForce = 0.1f;
+
+  self->maxSpeed = 3.0f + rand() * 2.0f / (float) RAND_MAX;
+  self->maxForce = 0.1f + rand() * 0.05f / (float) RAND_MAX;
   return self;
 }
 
@@ -26,7 +38,7 @@ void Vehicle_Destroy(Vehicle *self) {
 
 void Vehicle_Render(Vehicle *self, SDL_Renderer *renderer, SDL_Texture *vehicle_img) {
   static SDL_FPoint center;
-  static SDL_FRect dstrect = {.w = 110.0f, .h = 50.0f};
+  static SDL_FRect dstrect = {.w = 55.0f, .h = 25.0f};
 
   center.x = dstrect.w/2.0f;
   center.y = dstrect.h/2.0f;

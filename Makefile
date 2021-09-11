@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Wconversion -Wpedantic -O3
+CFLAGS = -Wall -Wextra -Wpedantic -O3
 BINOUT = build/main.exe
 
 

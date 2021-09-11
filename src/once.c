@@ -5,15 +5,23 @@
 #include "vector.h"
 #include "vehicle.h"
 
+#define STB_DS_IMPLEMENTATION
+#include "stb/stb_ds.h"
+
 void setup(
   SDL_Renderer *renderer,
-  Vehicle **vehicle,
+  Vehicle ***vehicle_arr,
+  const int len,
   SDL_Texture **vehicle_img,
   Vector **mouse,
-  Vector **force) {
+  Vector **force
+) {
 
   // create the vehicle
-  *vehicle = Vehicle_Create(55.0f, 25.0f, 2.0f, 1.0f);
+  for (int i = 0; i < len; ++i) {
+    Vehicle *v = Vehicle_Create();
+    arrput(*vehicle_arr, v);
+  }
 
   char *path_to_vehicle_img = __get_path__("assets/vehicle.png");
   SDL_Surface *surface = IMG_Load(path_to_vehicle_img);
@@ -29,8 +37,18 @@ void setup(
 
 
 
-void clean_up(Vehicle *vehicle, SDL_Texture *vehicle_img, Vector *mouse) {
-  Vehicle_Destroy(vehicle);
+void clean_up(
+  Vehicle **vehicle_arr,
+  SDL_Texture *vehicle_img,
+  Vector *mouse,
+  Vector *force
+) {
+
+  for (int i = 0; i < (int) arrlen(vehicle_arr); ++i) {
+    Vehicle_Destroy(vehicle_arr[i]);
+  }
+  arrfree(vehicle_arr);
   SDL_DestroyTexture(vehicle_img);
   Vector_Destroy(mouse);
+  Vector_Destroy(force);
 }
