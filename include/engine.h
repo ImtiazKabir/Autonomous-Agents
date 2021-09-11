@@ -27,7 +27,7 @@ void setup(
   Vector **force);
 
 void update(Vehicle *vehicle, Vector *mouse, Vector *force);
-void draw(SDL_Renderer *renderer, Vehicle *vehicle, SDL_Texture *vehicle_img);
+void draw(SDL_Renderer *renderer, Vehicle *vehicle, SDL_Texture *vehicle_img, Vector *mouse);
 void clean_up(Vehicle *vehicle, SDL_Texture *vehicle_img, Vector *mouse);
 
 #endif /* D07D45CE_AA78_4D49_B29A_EBD0B6BCD4AD */

@@ -43,7 +43,7 @@ void main_loop(void *v_renderer) {
 
   // update and draw
   update(vehicle, mouse, force);
-  draw(renderer, vehicle, vehicle_img);
+  draw(renderer, vehicle, vehicle_img, mouse);
   SDL_Delay(1000 / FPS);
   SDL_RenderPresent(renderer);
 }
