@@ -21,5 +21,8 @@ void Vehicle_ApplyForce(Vehicle *self, Vector *force);
 
 Vector *Vehicle_Seek(Vehicle *self, Vector *force, Vector *target);
 Vector *Vehicle_Flee(Vehicle *self, Vector *force, Vector *target);
+Vector *Vehicle_Arrive(Vehicle *self, Vector *force, Vector *target);
+Vector *Vehicle_Persue(Vehicle *self, Vector *force, Vehicle *target);
+Vector *Vehicle_Evade(Vehicle *self, Vector *force, Vehicle *target);
 
 #endif /* B2FF7708_CECE_4780_A9BA_F6FC35A095D8 */

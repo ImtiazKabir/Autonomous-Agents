@@ -39,8 +39,17 @@ void update(Vehicle **vehicle_arr, Vector *mouse, Vector *force) {
   mouse->x = (float) mx;
   mouse->y = (float) my;
 
-  for (int i = 0; i < (int) arrlen(vehicle_arr); ++i) {
-    Vehicle_ApplyForce(vehicle_arr[i], Vehicle_Seek(vehicle_arr[i], force, mouse));
-    Vehicle_Update(vehicle_arr[i]);
-  }
+  // for (int i = 0; i < (int) arrlen(vehicle_arr); ++i) {
+  //   Vehicle_ApplyForce(vehicle_arr[i], Vehicle_Arrive(vehicle_arr[i], force, mouse));
+  //   Vehicle_Update(vehicle_arr[i]);
+  // }
+
+  Vehicle_Arrive(vehicle_arr[0], force, mouse);
+  Vehicle_ApplyForce(vehicle_arr[0], force);
+
+  Vehicle_Persue(vehicle_arr[1], force, vehicle_arr[0]);
+  Vehicle_ApplyForce(vehicle_arr[1], force);
+
+  Vehicle_Update(vehicle_arr[0]);
+  Vehicle_Update(vehicle_arr[1]);
 }

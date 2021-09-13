@@ -1,5 +1,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <stdlib.h>
+#include <time.h>
 
 #include "engine.h"
 #include "vector.h"
@@ -16,6 +18,8 @@ void setup(
   Vector **mouse,
   Vector **force
 ) {
+
+  srand(time(NULL));
 
   // create the vehicle
   for (int i = 0; i < len; ++i) {

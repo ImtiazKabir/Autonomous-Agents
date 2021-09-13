@@ -21,7 +21,7 @@ void main_loop(void *v_renderer) {
   static Vector *mouse;
   static Vector *force;
   static Vehicle **vehicle_arr = NULL;
-  static const int len = 100;
+  static const int len = 2;
   static SDL_Texture *vehicle_img;
 
   // setup part
